@@ -1,0 +1,86 @@
+- hosts: localhost
+  become: true
+  tasks:
+
+  - name: Add stretch backports repo
+    apt_repository:
+      repo: deb http://deb.debian.org/debian stretch-backports main contrib
+      state: present
+      filename: stretch-backports.list
+
+  - name: Install tor
+    apt:
+      name: tor
+      state: latest
+      update_cache: yes
+
+  - name: Install Gajim with OMEMO support
+    apt: name={{item}} state=installed
+      update_cache: yes
+    with_items:
+      - gajim
+      - gajim-omemo
+      - gajim-httpupload
+      - gajim-urlimagepreview
+      - gajim-triggers
+
+  - name: Install Thunderbird, Enigmail, TorBirdy
+    apt: name={{item}} state=installed
+      update_cache: yes
+    with_items:
+      - thunderbird
+      - engimail
+      - torbirdy
+
+  - name: Install Tor-Browser
+    apt:
+      name: torbrowser-launcher
+      state: latest
+      default_release: stretch-backports
+      update_cache: yes
+
+  - name: Add Keepassxc ppa
+    apt_repository:
+      repo: 'ppa:phoerious/keepassxc'
+      codename: xenial
+      state: present
+      update_cache: yes
+
+  - name: Install Keepassxc
+    apt:
+      name: keepassxc
+      state: latest
+
+#  - name: Install AppImaged
+#    get_url:
+#      url: "https://github.com/AppImage/appimaged/releases/download/continuous/appimaged-x86_64.AppImage"
+#      dest: "/home/{{ ansible_env.USER }}/.riot-sh/appimaged-x86_64.AppImage"
+
+  - name: Install Firejail
+    apt:
+      name: Firejail
+      state: latest
+
+  - name: Install Torjail
+    get_url:
+      url: "https://raw.githubusercontent.com/torjail/torjail/master/torjail"
+      dest: "/home/{{ ansible_env.USER }}/bin/torjail"
+
+  - name: Add DNSCrypt-Proxy ppa
+    apt_repository:
+      repo: 'ppa:shevchuk/dnscrypt-proxy'
+      codename: xenial
+      state: present
+      update_cache: yes
+
+  - name: Install DNSCrypt-Proxy
+    apt:
+      name: dnscrypt-proxy
+      state: latest
+      update_cache: yes
+
+  - name: Install restic for encrypted backups
+    # TODO: https://github.com/restic/restic/releases/tag/v0.8.3
+
+# //TODO: Install tool to setup smartcard for full-disk-encryption
+# //TODO: - name: Use gajim only with tor using torjail
