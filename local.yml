@@ -57,9 +57,11 @@
 
 
   - name: Install Keepassxc
+    become: yes
+    become_user: "{{ current_user }}"
     get_url:
       url: "https://github.com/keepassxreboot/keepassxc/releases/download/2.3.3/KeePassXC-2.3.3-x86_64.AppImage"
-      dest: "/usr/bin/keepassxc"
+      dest: "/home/{{ current_user }}/bin/keepassxc"
       mode: 0755
 
 #  - name: Install AppImaged
@@ -73,9 +75,11 @@
       state: latest
 
   - name: Install Torjail
+    become: yes
+    become_user: "{{ current_user }}"
     get_url:
       url: "https://raw.githubusercontent.com/torjail/torjail/master/torjail"
-      dest: "/home/{{ ansible_env.USER }}/bin/torjail"
+      dest: "/home/{{ current_user }}/bin/torjail"
 
 #  - name: Add DNSCrypt-Proxy ppa
 #    apt_repository:
