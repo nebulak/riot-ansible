@@ -1,4 +1,5 @@
 - hosts: localhost
+  become: false
   #become: true
   #become_user: "{{ ansible_env.USER }}"
   #become_method: sudo
