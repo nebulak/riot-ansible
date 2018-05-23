@@ -15,8 +15,7 @@
       update_cache: yes
 
   - name: Install Gajim with OMEMO support
-    apt: name={{item}} state=installed
-      update_cache: yes
+    apt: name={{item}} state=installed update_cache=yes
     with_items:
       - gajim
       - gajim-omemo
@@ -25,8 +24,7 @@
       - gajim-triggers
 
   - name: Install Thunderbird, Enigmail, TorBirdy
-    apt: name={{item}} state=installed
-      update_cache: yes
+    apt: name={{item}} state=installed update_cache=yes
     with_items:
       - thunderbird
       - engimail
