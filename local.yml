@@ -1,12 +1,11 @@
 - hosts: localhost
-  #become: false
-  become: true
-  become_user: "{{ ansible_user }}"
-  become_method: sudo
+  become: false
+  #become: true
+  #become_user: "{{ ansible_user }}"
+  #become_method: sudo
   tasks:
-  
   - name: Test
-    debug: msg="{{ ansible_user }}"
+    debug: msg="{{ ansible_env.USER }}"
 
   - name: Add stretch backports repo
     apt_repository:
