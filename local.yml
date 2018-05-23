@@ -77,7 +77,7 @@
       state: latest
       update_cache: yes
 
-  - name: Install restic for encrypted backups
+  #- name: Install restic for encrypted backups
     # TODO: https://github.com/restic/restic/releases/tag/v0.8.3
 
 # //TODO: Install tool to setup smartcard for full-disk-encryption
