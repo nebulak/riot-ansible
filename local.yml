@@ -48,11 +48,11 @@
       default_release: stretch-backports
 
   - name: wget test
+    become: yes
+    become_user: "{{ current_user }}"
     get_url:
       url: "https://github.com/nebulak/riot-sh/raw/master/riot.sh"
       dest: "/home/{{ current_user }}/bin/riot.sh"
-      become: yes
-      become_user: "{{ current_user }}"
       mode: 0755
 
 
