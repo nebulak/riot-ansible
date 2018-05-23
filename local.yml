@@ -1,5 +1,7 @@
 - hosts: localhost
   become: true
+  become_user: "{{ ansible_env.USER }}"
+  become_method: sudo
   tasks:
 
   - name: Add stretch backports repo
