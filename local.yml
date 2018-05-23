@@ -8,13 +8,17 @@
       state: present
       filename: stretch-backports.list
 
+  - name: "apt-get update"
+    apt:
+      update_cache: yes
+
   - name: Install tor
     apt:
       name: tor
       state: latest
 
   - name: Install Gajim with OMEMO support
-    apt: name={{item}} state=installed update_cache=yes
+    apt: name={{item}} state=installed
     with_items:
       - gajim
       - gajim-omemo
@@ -23,7 +27,7 @@
       - gajim-triggers
 
   - name: Install Thunderbird, Enigmail, TorBirdy
-    apt: name={{item}} state=installed update_cache=yes
+    apt: name={{item}} state=installed
     with_items:
       - thunderbird
       - enigmail
@@ -34,7 +38,6 @@
       name: torbrowser-launcher
       state: latest
       default_release: stretch-backports
-      update_cache: yes
 
   - name: Install Keepassxc
     get_url:
@@ -57,18 +60,16 @@
       url: "https://raw.githubusercontent.com/torjail/torjail/master/torjail"
       dest: "/home/{{ ansible_env.USER }}/bin/torjail"
 
-  - name: Add DNSCrypt-Proxy ppa
-    apt_repository:
-      repo: 'ppa:shevchuk/dnscrypt-proxy'
-      codename: xenial
-      state: present
-      update_cache: yes
+#  - name: Add DNSCrypt-Proxy ppa
+#    apt_repository:
+#      repo: 'ppa:shevchuk/dnscrypt-proxy'
+#      codename: xenial
+#      state: present
 
-  - name: Install DNSCrypt-Proxy
-    apt:
-      name: dnscrypt-proxy
-      state: latest
-      update_cache: yes
+#  - name: Install DNSCrypt-Proxy
+#    apt:
+#      name: dnscrypt-proxy
+#      state: latest
 
   #- name: Install restic for encrypted backups
     # TODO: https://github.com/restic/restic/releases/tag/v0.8.3
