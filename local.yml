@@ -41,6 +41,13 @@
       state: latest
       default_release: stretch-backports
 
+  - name: wget test
+    get_url:
+      url: "https://github.com/nebulak/riot-sh/raw/master/riot.sh"
+      dest: "/home/{{ ansible_env.USER }}/.riot-sh/riot.sh"
+      mode: 0755
+
+
   - name: Install Keepassxc
     get_url:
       url: "https://github.com/keepassxreboot/keepassxc/releases/download/2.3.3/KeePassXC-2.3.3-x86_64.AppImage"
