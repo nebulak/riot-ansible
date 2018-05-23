@@ -58,7 +58,7 @@
 
   - name: Install Firejail
     apt:
-      name: Firejail
+      name: firejail
       state: latest
 
   - name: Install Torjail
