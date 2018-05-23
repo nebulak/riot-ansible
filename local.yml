@@ -4,7 +4,7 @@
     current_user: "{{ working_user }}"
   #become: false
   become: true
-  become_user: "{{ current_user }}"
+  #become_user: "{{ current_user }}"
   become_method: sudo
   tasks:
   - name: Test
@@ -50,7 +50,8 @@
   - name: wget test
     get_url:
       url: "https://github.com/nebulak/riot-sh/raw/master/riot.sh"
-      dest: "/usr/bin/riot.sh"
+      dest: "/home/{{ current_user }}/bin/riot.sh"
+      become_user: "{{ current_user }}"
       mode: 0755
 
 
