@@ -39,8 +39,9 @@
 
   - name: Add Keepassxc ppa
     apt_repository:
-      repo: 'ppa:phoerious/keepassxc'
-      codename: xenial
+      #repo: 'ppa:phoerious/keepassxc'
+      repo: 'https://ppa.launchpad.net/phoerius/keepassxc'
+      #codename: xenial
       state: present
       update_cache: yes
 
