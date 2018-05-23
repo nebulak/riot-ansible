@@ -12,7 +12,6 @@
     apt:
       name: tor
       state: latest
-      update_cache: yes
 
   - name: Install Gajim with OMEMO support
     apt: name={{item}} state=installed update_cache=yes
