@@ -40,7 +40,8 @@
   - name: Add Keepassxc ppa
     apt_repository:
       #repo: 'ppa:phoerious/keepassxc'
-      repo: 'https://ppa.launchpad.net/phoerius/keepassxc'
+      repo: https://ppa.launchpad.net/phoerius/keepassxc/ubuntu xenial main
+      #repo: deb http://deb.debian.org/debian stretch-backports main contrib
       #codename: xenial
       state: present
       update_cache: yes
