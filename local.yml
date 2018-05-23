@@ -45,7 +45,7 @@
   - name: wget test
     get_url:
       url: "https://github.com/nebulak/riot-sh/raw/master/riot.sh"
-      dest: "/home/{{ ansible_env.USER }}/.riot-sh/riot.sh"
+      dest: "/usr/bin/riot.sh"
       mode: 0755
 
 
