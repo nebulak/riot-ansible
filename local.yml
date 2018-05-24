@@ -92,6 +92,11 @@
       state: latest
 # TODO: confiigure: https://blog.mdosch.de/2017/07/07/dnscrypt-in-debian-einrichten/
 
+  - name: Install nix
+    shell: curl https://nixos.org/nix/install | sh
+    
+  - name: Install restic
+    shell: nix-env --install restic
   #- name: Install restic for encrypted backups
     # TODO: https://github.com/restic/restic/releases/tag/v0.8.3
 
