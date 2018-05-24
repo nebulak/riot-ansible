@@ -87,10 +87,10 @@
 #      codename: xenial
 #      state: present
 
-#  - name: Install DNSCrypt-Proxy
-#    apt:
-#      name: dnscrypt-proxy
-#      state: latest
+  - name: Install DNSCrypt-Proxy
+    apt:
+      name: dnscrypt-proxy
+      state: latest
 
   #- name: Install restic for encrypted backups
     # TODO: https://github.com/restic/restic/releases/tag/v0.8.3
