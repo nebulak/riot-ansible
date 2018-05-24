@@ -116,6 +116,11 @@
     become: yes
     become_user: "{{ current_user }}"
     shell: mv "/home/{{ current_user }}/bin/restic_0.9.0" "/home/{{ current_user }}/bin/restic"
+    
+  - name: Make restic binary executable
+    become: yes
+    become_user: "{{ current_user }}"
+    shell: chmod +x "/home/{{ current_user }}/bin/restic"
       #copy: no
       #src: "/home/{{ current_user }}/bin/restic_0.9.0.bz2" 
       #dest: "/home/{{ current_user }}/bin"
