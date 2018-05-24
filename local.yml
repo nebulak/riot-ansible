@@ -24,6 +24,11 @@
     apt:
       name: tor
       state: latest
+      
+  - name: Install bzip2
+    apt:
+      name: bzip2
+      state: latest
 
   - name: Install Gajim with OMEMO support
     apt: name={{item}} state=installed
@@ -105,10 +110,10 @@
   - name: Unpack restic
     become: yes
     become_user: "{{ current_user }}"
-    unarchive:
-      copy: no
-      src: "/home/{{ current_user }}/bin/restic_0.9.0.bz2" 
-      dest: "/home/{{ current_user }}/bin"
+    shell: bzip2 -d "/home/{{ current_user }}/bin/restic_0.9.0.bz2"
+      #copy: no
+      #src: "/home/{{ current_user }}/bin/restic_0.9.0.bz2" 
+      #dest: "/home/{{ current_user }}/bin"
       #creates: "/opt/android/{{ android_ndk_folder }}"
   #- name: Install restic for encrypted backups
     # TODO: https://github.com/restic/restic/releases/tag/v0.8.3
