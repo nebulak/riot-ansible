@@ -108,7 +108,7 @@
     unarchive:
       copy: no
       src: "/home/{{ current_user }}/bin/restic_0.9.0.bz2" 
-      dest: "/home/{{ current_user }}/bin/restic"
+      dest: "/home/{{ current_user }}/bin"
       #creates: "/opt/android/{{ android_ndk_folder }}"
   #- name: Install restic for encrypted backups
     # TODO: https://github.com/restic/restic/releases/tag/v0.8.3
