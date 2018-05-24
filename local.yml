@@ -74,6 +74,11 @@
       name: firejail
       state: latest
 
+  - name: Install Magic-Wormhole
+    apt:
+      name: magic-wormhole
+      state: latest
+
   - name: Install Torjail
     become: yes
     become_user: "{{ current_user }}"
@@ -81,16 +86,11 @@
       url: "https://raw.githubusercontent.com/torjail/torjail/master/torjail"
       dest: "/home/{{ current_user }}/bin/torjail"
 
-#  - name: Add DNSCrypt-Proxy ppa
-#    apt_repository:
-#      repo: 'ppa:shevchuk/dnscrypt-proxy'
-#      codename: xenial
-#      state: present
-
   - name: Install DNSCrypt-Proxy
     apt:
       name: dnscrypt-proxy
       state: latest
+# TODO: confiigure: https://blog.mdosch.de/2017/07/07/dnscrypt-in-debian-einrichten/
 
   #- name: Install restic for encrypted backups
     # TODO: https://github.com/restic/restic/releases/tag/v0.8.3
