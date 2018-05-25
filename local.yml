@@ -97,8 +97,22 @@
       state: latest
 # TODO: confiigure: https://blog.mdosch.de/2017/07/07/dnscrypt-in-debian-einrichten/
 
-  - name: Install nix
-    shell: curl https://nixos.org/nix/install | sh
+  - name: Enable service httpd, and not touch the running state
+    service:
+      name: dnscrypt-proxy.service
+      enabled: yes
+
+  - name: Start service httpd, if not running
+    service:
+      name: dnscrypt-proxy.service
+      state: started
+
+  - name: configure dnscrypt
+    lineinfile:
+      path: /etc/NetworkManager/NetworkManager.conf
+      regexp: '^dns=dnsmasq'
+      line: '#dns=dnsmasq'
+    
     
   - name: Install restic
     become: yes
