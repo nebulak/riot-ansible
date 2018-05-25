@@ -108,13 +108,13 @@
 
   - name: configure dnscrypt
     replace:
-      path: /etc/resolv.conf
+      name: /etc/resolv.conf
       regexp: '^nameserver'
       replace: '#nameserver'
       
   - name: configure dnscrypt
     lineinfile:
-      path: /etc/resolv.conf
+      name: /etc/resolv.conf
       line: 'nameserver 127.0.2.1'
 
   - name: Start service dnscrypt-proxy, if not running
