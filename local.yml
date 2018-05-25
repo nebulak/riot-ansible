@@ -78,6 +78,11 @@
     apt:
       name: firejail
       state: latest
+      
+  - name: Install Firetools
+    apt:
+      name: firetools
+      state: latest
 
   - name: Install Magic-Wormhole
     apt:
