@@ -74,14 +74,17 @@
       state: latest
       default_release: syncthing
 
-  - name: wget test
-    become: yes
-    become_user: "{{ current_user }}"
+  - name: Install onion gajim
     get_url:
-      url: "https://github.com/nebulak/riot-sh/raw/master/riot.sh"
-      dest: "/home/{{ current_user }}/bin/riot.sh"
+      url: "https://github.com/nebulak/onion-gajim/raw/master/onion-gajim"
+      dest: "/usr/bin/onion-gajim"
       mode: 0755
 
+  - name: Create onion gajim desktop-file
+    get_url:
+      url: "https://github.com/nebulak/onion-gajim/raw/master/onion-gajim.desktop"
+      dest: "/usr/share/applications/onion-gajim"
+      mode: 0755
 
   - name: Install Keepassxc
     become: yes
