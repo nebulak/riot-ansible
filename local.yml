@@ -96,6 +96,22 @@
 #      url: "https://github.com/AppImage/appimaged/releases/download/continuous/appimaged-x86_64.AppImage"
 #      dest: "/home/{{ ansible_env.USER }}/.riot-sh/appimaged-x86_64.AppImage"
 
+  - name: Download gocryptfs
+    become: yes
+    become_user: "{{ current_user }}"
+    get_url:
+      url: "https://github.com/rfjakob/gocryptfs/releases/download/v1.4.4/gocryptfs_v1.4.4_linux-static_amd64.tar.gz"
+      dest: "/home/{{ current_user }}/bin/gocryptfs.tar.gz"
+      mode: 0755
+
+  - name: extract gocryptfs
+    become: yes
+    become_user: "{{ current_user }}"
+    unarchive:
+      src: "/home/{{ current_user }}/bin/gocryptfs.tar.gz"
+      dest: "/home/{{ current_user }}/bin"
+      remote_src: yes
+
   - name: Install Firejail
     apt:
       name: firejail
