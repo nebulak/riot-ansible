@@ -117,16 +117,28 @@
       name: /etc/resolv.conf
       line: 'nameserver 127.0.2.1'
 
+  - name: configure dnscrypt
+    replace:
+      path: /etc/NetworkManager/NetworkManager.conf
+      regexp: '^dns=dnsmasq'
+      line: '#dns=dnsmasq'
+
+  - name: more dnscrypt-proxy configuration
+    lineinfile:
+      path: /etc/NetworkManager/NetworkManager.conf
+      insertafter: '^[main]'
+      line: 'dns=none'
+
   - name: Start service dnscrypt-proxy, if not running
     service:
       name: dnscrypt-proxy.service
       state: started
 
-  - name: configure dnscrypt
-    lineinfile:
-      path: /etc/NetworkManager/NetworkManager.conf
-      regexp: '^dns=dnsmasq'
-      line: '#dns=dnsmasq'
+  - name: Restart dnscrypt-proxy
+    service:
+      name: dnscrypt-proxy.service
+      state: restarted
+  
    
     
   - name: Install restic
