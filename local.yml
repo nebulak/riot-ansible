@@ -12,7 +12,7 @@
 
   - name: Add stretch backports repo
     apt_repository:
-      repo: http://deb.debian.org/debian stretch-backports main contrib
+      repo: deb http://deb.debian.org/debian stretch-backports main contrib
       state: present
       filename: stretch-backports.list
 
@@ -23,7 +23,7 @@
 
   - name: Add syncthing repo
     apt_repository:
-      repo: https://apt.syncthing.net/ syncthing stable
+      repo: deb https://apt.syncthing.net/ syncthing stable
       state: present
       filename: syncthing.list
 
