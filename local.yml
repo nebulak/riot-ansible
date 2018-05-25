@@ -119,7 +119,7 @@
 
   - name: configure dnscrypt
     replace:
-      path: /etc/NetworkManager/NetworkManager.conf
+      name: /etc/NetworkManager/NetworkManager.conf
       regexp: '^dns=dnsmasq'
       line: '#dns=dnsmasq'
 
