@@ -90,56 +90,7 @@
     get_url:
       url: "https://raw.githubusercontent.com/torjail/torjail/master/torjail"
       dest: "/home/{{ current_user }}/bin/torjail"
-
-  - name: Install DNSCrypt-Proxy
-    apt:
-      name: dnscrypt-proxy
-      state: latest
-# TODO: confiigure: https://blog.mdosch.de/2017/07/07/dnscrypt-in-debian-einrichten/
-
-  - name: Enable service httpd, and not touch the running state
-    service:
-      name: dnscrypt-proxy.service
-      enabled: yes
-
-
-  # Use dnscrypt-proxy
-#nameserver 127.0.2.1
-
-  - name: configure dnscrypt
-    replace:
-      name: /etc/resolv.conf
-      regexp: '^nameserver'
-      replace: '#nameserver'
-      
-  - name: configure dnscrypt
-    lineinfile:
-      name: /etc/resolv.conf
-      line: 'nameserver 127.0.2.1'
-
-  - name: configure dnscrypt
-    replace:
-      name: /etc/NetworkManager/NetworkManager.conf
-      regexp: '^dns=dnsmasq'
-      replace: '#dns=dnsmasq'
-
-  - name: more dnscrypt-proxy configuration
-    lineinfile:
-      name: /etc/NetworkManager/NetworkManager.conf
-      insertafter: '^[main]'
-      line: 'dns=none'
-
-  - name: Start service dnscrypt-proxy, if not running
-    service:
-      name: dnscrypt-proxy.service
-      state: started
-
-  - name: Restart dnscrypt-proxy
-    service:
-      name: dnscrypt-proxy.service
-      state: restarted
   
-   
     
   - name: Install restic
     become: yes
