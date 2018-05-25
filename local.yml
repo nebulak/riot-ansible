@@ -121,7 +121,7 @@
     replace:
       name: /etc/NetworkManager/NetworkManager.conf
       regexp: '^dns=dnsmasq'
-      line: '#dns=dnsmasq'
+      replace: '#dns=dnsmasq'
 
   - name: more dnscrypt-proxy configuration
     lineinfile:
