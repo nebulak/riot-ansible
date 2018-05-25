@@ -125,7 +125,7 @@
 
   - name: more dnscrypt-proxy configuration
     lineinfile:
-      path: /etc/NetworkManager/NetworkManager.conf
+      name: /etc/NetworkManager/NetworkManager.conf
       insertafter: '^[main]'
       line: 'dns=none'
 
