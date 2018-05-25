@@ -83,11 +83,11 @@
   - name: Create onion gajim desktop-file
     get_url:
       url: "https://github.com/nebulak/onion-gajim/raw/master/onion-gajim.desktop"
-      dest: "/usr/share/applications/onion-gajim"
+      dest: "/usr/share/applications/onion-gajim.desktop"
       mode: 0755
       
   - name: Install onion-gajim desktop file
-    shell: desktop-file-install "/usr/share/applications/onion-gajim"
+    shell: desktop-file-install "/usr/share/applications/onion-gajim.desktop"
 
 
   - name: Install Keepassxc
