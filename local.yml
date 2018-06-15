@@ -7,7 +7,7 @@
   #become_user: "{{ current_user }}"
   become_method: sudo
   tasks:
-  
+
   - name: Install apt-transport-https
     apt:
       name: apt-transport-https
@@ -30,7 +30,7 @@
       state: present
       filename: syncthing.list
 
-  
+
 
   - name: "apt-get update"
     apt:
@@ -40,7 +40,7 @@
     apt:
       name: tor
       state: latest
-      
+
   - name: Install bzip2
     apt:
       name: bzip2
@@ -85,16 +85,26 @@
       url: "https://github.com/nebulak/onion-gajim/raw/master/onion-gajim.desktop"
       dest: "/usr/share/applications/onion-gajim.desktop"
       mode: 0755
-      
+
   - name: Install onion-gajim desktop file
     shell: desktop-file-install "/usr/share/applications/onion-gajim.desktop"
 
 
-  - name: Install Keepassxc
+  - name: Install Keepassxc for x86_64
     become: yes
     become_user: "{{ current_user }}"
+    when: ansible_architecture == "x86_64"
     get_url:
       url: "https://github.com/keepassxreboot/keepassxc/releases/download/2.3.3/KeePassXC-2.3.3-x86_64.AppImage"
+      dest: "/home/{{ current_user }}/bin/keepassxc"
+      mode: 0755
+
+  - name: Install Keepassxc for i386
+    become: yes
+    become_user: "{{ current_user }}"
+    when: ansible_architecture == "i386"
+    get_url:
+      url: "https://github.com/keepassxreboot/keepassxc/releases/download/2.3.3/KeePassXC-2.3.3-x86.AppImage"
       dest: "/home/{{ current_user }}/bin/keepassxc"
       mode: 0755
 
@@ -123,7 +133,7 @@
     apt:
       name: firejail
       state: latest
-      
+
   - name: Install Firetools
     apt:
       name: firetools
@@ -140,31 +150,40 @@
     get_url:
       url: "https://raw.githubusercontent.com/torjail/torjail/master/torjail"
       dest: "/home/{{ current_user }}/bin/torjail"
-  
-    
-  - name: Install restic
+
+
+  - name: Install restic for x86_64
     become: yes
     become_user: "{{ current_user }}"
+    when: ansible_architecture == "x86_64"
     get_url:
       url: https://github.com/restic/restic/releases/download/v0.9.0/restic_0.9.0_linux_amd64.bz2
+      dest: "/home/{{ current_user }}/bin/restic_0.9.0.bz2"
+
+  - name: Install restic for x86
+    become: yes
+    become_user: "{{ current_user }}"
+    when: ansible_architecture == "i386"
+    get_url:
+      url: https://github.com/restic/restic/releases/download/v0.9.0/restic_0.9.0_linux_386.bz2
       dest: "/home/{{ current_user }}/bin/restic_0.9.0.bz2"
 
   - name: Unpack restic
     become: yes
     become_user: "{{ current_user }}"
     shell: bzip2 -d "/home/{{ current_user }}/bin/restic_0.9.0.bz2"
-    
+
   - name: Rename restic binary
     become: yes
     become_user: "{{ current_user }}"
     shell: mv "/home/{{ current_user }}/bin/restic_0.9.0" "/home/{{ current_user }}/bin/restic"
-    
+
   - name: Make restic binary executable
     become: yes
     become_user: "{{ current_user }}"
     shell: chmod +x "/home/{{ current_user }}/bin/restic"
       #copy: no
-      #src: "/home/{{ current_user }}/bin/restic_0.9.0.bz2" 
+      #src: "/home/{{ current_user }}/bin/restic_0.9.0.bz2"
       #dest: "/home/{{ current_user }}/bin"
       #creates: "/opt/android/{{ android_ndk_folder }}"
   #- name: Install restic for encrypted backups
