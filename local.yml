@@ -90,40 +90,41 @@
     shell: desktop-file-install "/usr/share/applications/onion-gajim.desktop"
 
 
-  - name: Install Keepassxc for x86_64
-    become: yes
-    become_user: "{{ current_user }}"
-    when: ansible_architecture == "x86_64"
-    get_url:
-      url: "https://github.com/keepassxreboot/keepassxc/releases/download/2.3.3/KeePassXC-2.3.3-x86_64.AppImage"
-      dest: "/home/{{ current_user }}/bin/keepassxc"
-      mode: 0755
-
-  - name: Install Keepassxc for i386
+  - name: Download KeeWeb for i386
     become: yes
     become_user: "{{ current_user }}"
     when: ansible_architecture == "i386"
     get_url:
-      url: "https://github.com/keepassxreboot/keepassxc/releases/download/2.3.3/KeePassXC-2.3.3-x86.AppImage"
-      dest: "/home/{{ current_user }}/bin/keepassxc"
+      url: "https://github.com/keeweb/keeweb/releases/download/v1.6.3/KeeWeb-1.6.3.linux.ia32.deb"
+      dest: "/tmp/riotsh/keeweb.deb"
       mode: 0755
 
-#  - name: Install AppImaged
-#    get_url:
-#      url: "https://github.com/AppImage/appimaged/releases/download/continuous/appimaged-x86_64.AppImage"
-#      dest: "/home/{{ ansible_env.USER }}/.riot-sh/appimaged-x86_64.AppImage"
-
-  - name: Download gocryptfs
+  - name: Download KeeWeb for x86_64
     become: yes
     become_user: "{{ current_user }}"
+    when: ansible_architecture == "x86_64"
+    get_url:
+      url: "https://github.com/keeweb/keeweb/releases/download/v1.6.3/KeeWeb-1.6.3.linux.x64.deb"
+      dest: "/tmp/riotsh/keeweb.deb"
+      mode: 0755
+
+  - name: Install KeeWeb .deb package
+    apt:
+      deb: /tmp/riotsh/keeweb.deb
+
+  - name: Download gocryptfs for x86_64
+    become: yes
+    become_user: "{{ current_user }}"
+    when: ansible_architecture == "x86_64"
     get_url:
       url: "https://github.com/rfjakob/gocryptfs/releases/download/v1.4.4/gocryptfs_v1.4.4_linux-static_amd64.tar.gz"
       dest: "/home/{{ current_user }}/bin/gocryptfs.tar.gz"
       mode: 0755
 
-  - name: extract gocryptfs
+  - name: extract gocryptfs for x86_64
     become: yes
     become_user: "{{ current_user }}"
+    when: ansible_architecture == "x86_64"
     unarchive:
       src: "/home/{{ current_user }}/bin/gocryptfs.tar.gz"
       dest: "/home/{{ current_user }}/bin"
@@ -182,12 +183,6 @@
     become: yes
     become_user: "{{ current_user }}"
     shell: chmod +x "/home/{{ current_user }}/bin/restic"
-      #copy: no
-      #src: "/home/{{ current_user }}/bin/restic_0.9.0.bz2"
-      #dest: "/home/{{ current_user }}/bin"
-      #creates: "/opt/android/{{ android_ndk_folder }}"
-  #- name: Install restic for encrypted backups
-    # TODO: https://github.com/restic/restic/releases/tag/v0.8.3
 
 # //TODO: Install tool to setup smartcard for full-disk-encryption
 # //TODO: - name: Use gajim only with tor using torjail
