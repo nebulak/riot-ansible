@@ -109,8 +109,10 @@
       mode: 0755
 
   - name: Install KeeWeb .deb package
+    become: yes
+    become_user: "{{ current_user }}"
     apt:
-      deb: /tmp/riotsh/keeweb.deb
+      deb: "/home/{{ current_user }}/bin/keeweb.deb"
 
   - name: Download gocryptfs for x86_64
     become: yes
