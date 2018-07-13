@@ -96,7 +96,7 @@
     when: ansible_architecture == "i386"
     get_url:
       url: "https://github.com/keeweb/keeweb/releases/download/v1.6.3/KeeWeb-1.6.3.linux.ia32.deb"
-      dest: "/tmp/riotsh/keeweb.deb"
+      dest: "/home/{{ current_user }}/bin/keeweb.deb"
       mode: 0755
 
   - name: Download KeeWeb for x86_64
@@ -105,7 +105,7 @@
     when: ansible_architecture == "x86_64"
     get_url:
       url: "https://github.com/keeweb/keeweb/releases/download/v1.6.3/KeeWeb-1.6.3.linux.x64.deb"
-      dest: "/tmp/riotsh/keeweb.deb"
+      dest: "/home/{{ current_user }}/bin/keeweb.deb"
       mode: 0755
 
   - name: Install KeeWeb .deb package
