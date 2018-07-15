@@ -186,3 +186,22 @@
 
 # //TODO: Install tool to setup smartcard for full-disk-encryption
 # //TODO: - name: Use gajim only with tor using torjail
+
+# STYLE
+
+  - name: Install arc-dark theme
+    apt: name={{item}} state=installed
+    with_items:
+      - arc-theme
+
+  - name: Setup arc dark theme for gtk
+    shell: gsettings set org.gnome.desktop.interface gtk-theme "arc-dark"
+  
+  - name: Setup arc dark theme for windows
+    shell: gsettings set org.gnome.desktop.wm.preferences theme "arc-dark"
+  
+  - name: install flat remix icons
+    shell: cd /tmp && rm -rf flat-remix && git clone https://github.com/daniruiz/flat-remix && mkdir -p ~/.icons && cp -r flat-remix/Flat-Remix* ~/.icons/
+
+  - name: setup flat remix icons
+    shell: gsettings set org.gnome.desktop.interface icon-theme "Flat-Remix"
