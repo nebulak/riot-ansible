@@ -213,3 +213,8 @@
     become: yes
     become_user: "{{ current_user }}"
     shell: gsettings set org.gnome.desktop.interface icon-theme "Flat-Remix"
+
+  - name: add whisker-menu
+    apt: name={{item}} state=installed
+    with_items:
+      - xfce4-whiskermenu-plugin
