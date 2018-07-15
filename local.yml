@@ -195,13 +195,21 @@
       - arc-theme
 
   - name: Setup arc dark theme for gtk
+    become: yes
+    become_user: "{{ current_user }}"
     shell: gsettings set org.gnome.desktop.interface gtk-theme "arc-dark"
   
   - name: Setup arc dark theme for windows
+    become: yes
+    become_user: "{{ current_user }}"
     shell: gsettings set org.gnome.desktop.wm.preferences theme "arc-dark"
   
   - name: install flat remix icons
+    become: yes
+    become_user: "{{ current_user }}"
     shell: cd /tmp && rm -rf flat-remix && git clone https://github.com/daniruiz/flat-remix && mkdir -p ~/.icons && cp -r flat-remix/Flat-Remix* ~/.icons/
 
   - name: setup flat remix icons
+    become: yes
+    become_user: "{{ current_user }}"
     shell: gsettings set org.gnome.desktop.interface icon-theme "Flat-Remix"
