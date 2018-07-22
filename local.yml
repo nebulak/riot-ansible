@@ -93,7 +93,7 @@
   - name: Install Keepass2
     apt: name={{item}} state=installed
     with_items:
-      - mono
+      - mono-complete
       - keepass2
   
   - name: Install KeepassHTTP
