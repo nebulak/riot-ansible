@@ -90,27 +90,17 @@
     shell: desktop-file-install "/usr/share/applications/onion-gajim.desktop"
 
 
-  - name: Download KeeWeb for i386
-    become: yes
-    when: ansible_architecture == "i386"
+  - name: Install Keepass2
+    apt: name={{item}} state=installed
+    with_items:
+      - mono
+      - keepass2
+  
+  - name: Install KeepassHTTP
     get_url:
-      url: "https://github.com/keeweb/keeweb/releases/download/v1.6.3/KeeWeb-1.6.3.linux.ia32.deb"
-      dest: "/tmp/keeweb.deb"
-      mode: 0755
-
-  - name: Download KeeWeb for x86_64
-    become: yes
-    when: ansible_architecture == "x86_64"
-    get_url:
-      url: "https://github.com/keeweb/keeweb/releases/download/v1.6.3/KeeWeb-1.6.3.linux.x64.deb"
-      dest: "/tmp/keeweb.deb"
-      mode: 0755
-
-  - name: Install KeeWeb .deb package
-    become: yes
-    become_method: sudo
-    apt:
-      deb: "/tmp/keeweb.deb"
+      url: "https://raw.github.com/pfn/keepasshttp/master/KeePassHttp.plgx"
+      dest: "/usr/lib/keepass/Plugins/KeePassHttp.plgx"
+      mode: 0755      
 
   - name: Download gocryptfs for x86_64
     become: yes
