@@ -99,13 +99,13 @@
   - name: Install KeepassHTTP
     get_url:
       url: "https://raw.github.com/pfn/keepasshttp/master/KeePassHttp.plgx"
-      dest: "/usr/lib/keepass/Plugins/KeePassHttp.plgx"
+      dest: "/usr/lib/keepass2/Plugins/KeePassHttp.plgx"
       mode: 0755
   
   - name: Install KeepassFavicon downloader
     get_url:
       url: "https://github.com/navossoc/KeePass-Yet-Another-Favicon-Downloader/releases/download/v1.1.1.0/YetAnotherFaviconDownloader.plgx"
-      dest: "/usr/lib/keepass/Plugins/YetAnotherFaviconDownloader.plgx"
+      dest: "/usr/lib/keepass2/Plugins/YetAnotherFaviconDownloader.plgx"
       mode: 0755   
 
   - name: Download gocryptfs for x86_64
