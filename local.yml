@@ -112,7 +112,7 @@
     become: yes
     become_user: "{{ current_user }}"
     get_url:
-      url: "https://bitbucket.org/devinmartin/keeotp/downloads/KeeOtp-1.3.9.zip
+      url: "https://bitbucket.org/devinmartin/keeotp/downloads/KeeOtp-1.3.9.zip"
       dest: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp.zip"
       mode: 0755
     
