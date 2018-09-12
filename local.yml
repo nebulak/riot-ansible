@@ -30,7 +30,15 @@
       state: present
       filename: syncthing.list
 
+  - name: Create .riot-sh directory
+    become: yes
+    become_user: "{{ current_user }}"
+    file: path="/home/{{ current_user }}/.riot-sh" state=directory
 
+  - name: Create .riot-sh/temp directory
+    become: yes
+    become_user: "{{ current_user }}"
+    file: path="/home/{{ current_user }}/.riot-sh/temp" state=directory
 
   - name: "apt-get update"
     apt:
