@@ -76,6 +76,14 @@
       state: latest
       default_release: stretch-backports
 
+  - name: Setup gnupg.conf
+    become: yes
+    become_user: "{{ current_user }}"
+    get_url:
+      url: "https://raw.githubusercontent.com/ioerror/duraconf/master/configs/gnupg/gpg.conf"
+      dest: "/home/{{ current_user }}/.gnupg/gpg.conf"
+      mode: 0700
+
   - name: Install syncthing
     apt:
       name: syncthing
