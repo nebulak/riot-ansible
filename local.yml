@@ -108,6 +108,41 @@
       dest: "/usr/lib/keepass2/Plugins/YetAnotherFaviconDownloader.plgx"
       mode: 0755   
 
+  - name: Download KeeOTP
+    become: yes
+    become_user: "{{ current_user }}"
+    get_url:
+      url: "https://bitbucket.org/devinmartin/keeotp/downloads/KeeOtp-1.3.9.zip
+      dest: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp.zip"
+      mode: 0755
+    
+  - name: extract KeeOTP
+    become: yes
+    become_user: "{{ current_user }}"
+    unarchive:
+      src: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp.zip"
+      dest: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp"
+      remote_src: yes
+  
+  - name: install OtpSharp.dll
+    copy:
+      src: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp/dlls/OtpSharp.dll"
+      dest: "/usr/lib/keepass2/Plugins/OtpSharp.dll"
+      mode: 0755
+      
+  - name: install KeeOtp.dll
+    copy:
+      src: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp/dlls/KeeOtp.dll"
+      dest: "/usr/lib/keepass2/Plugins/KeeOtp.dll"
+      mode: 0755
+      
+  - name: install KeeOTP
+    copy:
+      src: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp/KeeOtp.plgx"
+      dest: "/usr/lib/keepass2/Plugins/KeeOtp.plgx"
+      mode: 0755
+  
+
   - name: Download gocryptfs for x86_64
     become: yes
     become_user: "{{ current_user }}"
