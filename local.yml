@@ -83,6 +83,14 @@
       url: "https://raw.githubusercontent.com/ioerror/duraconf/master/configs/gnupg/gpg.conf"
       dest: "/home/{{ current_user }}/.gnupg/gpg.conf"
       mode: 0700
+  
+  - name: Setup gpg-agent.conf
+    become: yes
+    become_user: "{{ current_user }}"
+    get_url:
+      url: "https://gist.githubusercontent.com/nebulak/2d8a842b28c9749393bcb0c416744948/raw/6afe7af5d7fb9486f458e6e9093bfe3ac43d1570/gpg-agent.conf"
+      dest: "/home/{{ current_user }}/.gnupg/gpg-agent.conf"
+      mode: 0700
 
   - name: Install syncthing
     apt:
