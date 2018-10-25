@@ -113,63 +113,17 @@
   - name: Install onion-gajim desktop file
     shell: desktop-file-install "/usr/share/applications/onion-gajim.desktop"
 
-
-  - name: Install Keepass2
-    apt: name={{item}} state=installed
-    with_items:
-      - mono-complete
-      - keepass2
   
-  - name: Install KeepassHTTP
-    get_url:
-      url: "https://raw.github.com/pfn/keepasshttp/master/KeePassHttp.plgx"
-      dest: "/usr/lib/keepass2/Plugins/KeePassHttp.plgx"
-      mode: 0755
-  
-  - name: Install KeepassFavicon downloader
-    get_url:
-      url: "https://github.com/navossoc/KeePass-Yet-Another-Favicon-Downloader/releases/download/v1.1.1.0/YetAnotherFaviconDownloader.plgx"
-      dest: "/usr/lib/keepass2/Plugins/YetAnotherFaviconDownloader.plgx"
-      mode: 0755   
-
-  - name: Download KeeOTP
-    become: yes
-    become_user: "{{ current_user }}"
-    get_url:
-      url: "https://bitbucket.org/devinmartin/keeotp/downloads/KeeOtp-1.3.9.zip"
-      dest: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp.zip"
-      mode: 0755
-  
-  - name: Create directory for extracted KeeOtp archive
-    become: yes
-    become_user: "{{ current_user }}"
-    file: path="/home/{{ current_user }}/.riot-sh/temp/KeeOtp" state=directory
-  
-  - name: extract KeeOTP
-    become: yes
-    become_user: "{{ current_user }}"
-    unarchive:
-      src: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp.zip"
-      dest: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp"
-      remote_src: yes
-  
-  - name: install OtpSharp.dll
-    copy:
-      src: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp/dlls/OtpSharp.dll"
-      dest: "/usr/lib/keepass2/Plugins/OtpSharp.dll"
-      mode: 0755
-      
-  - name: install KeeOtp.dll
-    copy:
-      src: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp/dlls/KeeOtp.dll"
-      dest: "/usr/lib/keepass2/Plugins/KeeOtp.dll"
-      mode: 0755
-      
-  - name: install KeeOTP
-    copy:
-      src: "/home/{{ current_user }}/.riot-sh/temp/KeeOtp/KeeOtp.plgx"
-      dest: "/usr/lib/keepass2/Plugins/KeeOtp.plgx"
-      mode: 0755
+  - name: setup debian sid repository
+    apt_repository:
+    repo: deb http://ftp.ch.debian.org/debian sid main contrib non-free
+    state: present
+    
+  - name: Install KeePassXC
+    apt: 
+      name: keepassxc 
+      state: latest
+      default_release: sid
   
 
   - name: Download gocryptfs for x86_64
