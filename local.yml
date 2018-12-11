@@ -179,36 +179,11 @@
       dest: "/home/{{ current_user }}/bin/torjail"
 
 
-  - name: Install restic for x86_64
-    become: yes
-    become_user: "{{ current_user }}"
-    when: ansible_architecture == "x86_64"
-    get_url:
-      url: https://github.com/restic/restic/releases/download/v0.9.0/restic_0.9.0_linux_amd64.bz2
-      dest: "/home/{{ current_user }}/bin/restic_0.9.0.bz2"
-
-  - name: Install restic for x86
-    become: yes
-    become_user: "{{ current_user }}"
-    when: ansible_architecture == "i386"
-    get_url:
-      url: https://github.com/restic/restic/releases/download/v0.9.0/restic_0.9.0_linux_386.bz2
-      dest: "/home/{{ current_user }}/bin/restic_0.9.0.bz2"
-
-  - name: Unpack restic
-    become: yes
-    become_user: "{{ current_user }}"
-    shell: bzip2 -d "/home/{{ current_user }}/bin/restic_0.9.0.bz2"
-
-  - name: Rename restic binary
-    become: yes
-    become_user: "{{ current_user }}"
-    shell: mv "/home/{{ current_user }}/bin/restic_0.9.0" "/home/{{ current_user }}/bin/restic"
-
-  - name: Make restic binary executable
-    become: yes
-    become_user: "{{ current_user }}"
-    shell: chmod +x "/home/{{ current_user }}/bin/restic"
+  - name: Install restic
+    apt: 
+      name: restic
+      state: latest
+      default_release: sid
 
 # //TODO: Install tool to setup smartcard for full-disk-encryption
 # //TODO: - name: Use gajim only with tor using torjail
