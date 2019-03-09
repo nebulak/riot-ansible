@@ -76,12 +76,24 @@
       patterns: "*.default"
       register: firefox_profile_paths
       
-  - name: copy user.js file to thunderbird default profile
+  - name: copy user.js file to firefox default profile
     become: yes
     become_user: "{{ current_user }}"
     get_url:
       url: https://www.privacy-handbuch.de/download/moderat/user.js
       dest: "{{ firefox_profile_paths.directories[0].path }}"
+  
+  - name: add https-everywhere
+    apt:
+      name: xul-ext-https-everywhere
+      state: latest
+      default_release: sid
+
+  - name: add privacy-badger
+    apt:
+      name: webext-privacy-badger
+      state: latest
+      default_release: sid
 
   - name: Setup gnupg.conf
     become: yes
