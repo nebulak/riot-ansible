@@ -94,6 +94,12 @@
       name: webext-privacy-badger
       state: latest
       default_release: sid
+      
+  - name: add uBlock Origin
+    apt:
+      name: webext-ublock-origin
+      state: latest
+      default_release: sid
 
   - name: Setup gnupg.conf
     become: yes
