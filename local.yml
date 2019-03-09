@@ -67,6 +67,22 @@
       state: latest
       default_release: stretch-backports
 
+  # https://www.privacy-handbuch.de/download/moderat/user.js
+  - name: Add secure user.js file to firefox
+    become: yes
+    become_user: "{{ current_user }}"
+    find:
+      paths: "/home/{{ current_user }}/.mozilla/firefox"
+      patterns: "*.default"
+      register: firefox_profile_paths
+      
+  - name: copy user.js file to thunderbird default profile
+    become: yes
+    become_user: "{{ current_user }}"
+    get_url:
+      url: https://www.privacy-handbuch.de/download/moderat/user.js
+      dest: "{{ firefox_profile_paths.directories[0].path }}"
+
   - name: Setup gnupg.conf
     become: yes
     become_user: "{{ current_user }}"
