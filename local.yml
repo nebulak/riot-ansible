@@ -174,6 +174,25 @@
       state: latest
       default_release: sid
 
+# Hibernation with luks
+
+  - name: Clone luks-suspend
+    git:
+      repo: https://github.com/nailfarmer/debian-luks-suspend.git
+      version: master
+      depth: 1
+      force: yes
+      dest: "/home/{{ current_user }}/.riot.sh/debian-luks-suspend"
+      accept_hostkey: yes
+      # ssh-agent doesn't allow key to pass through remote sudo commands.
+      # become: yes
+  
+  - name: Install debian-luks-suspend
+    command: make install
+    args:
+      chdir: "/home/{{ current_user }}/.riot.sh/debian-luks-suspend"
+
+
 
 # STYLE
 
