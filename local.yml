@@ -129,7 +129,7 @@
     apt:
       name: syncthing
       state: latest
-      default_release: syncthing
+      default_release: sid
     
   - name: Install KeePassXC
     apt: 
@@ -159,6 +159,7 @@
   - name: Install Magic-Wormhole
     apt:
       name: magic-wormhole
+      default_release: sid
       state: latest
 
   - name: Install Torjail
