@@ -162,11 +162,11 @@
       default_release: sid
       state: latest
 
-  - name: Install Torjail
+  - name: Install Orjail
     become: yes
     become_user: "{{ current_user }}"
     get_url:
-      url: "https://raw.githubusercontent.com/orjail/orjail/master/orjail"
+      url: "https://raw.githubusercontent.com/orjail/orjail/master/usr/sbin/orjail"
       dest: "/home/{{ current_user }}/bin/orjail"
 
 
