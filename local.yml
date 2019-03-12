@@ -182,7 +182,7 @@
       version: master
       depth: 1
       force: yes
-      dest: "/home/{{ current_user }}/.riot.sh/debian-luks-suspend"
+      dest: "/home/{{ current_user }}/.riot-sh/debian-luks-suspend"
       accept_hostkey: yes
       # ssh-agent doesn't allow key to pass through remote sudo commands.
       # become: yes
@@ -190,7 +190,7 @@
   - name: Install debian-luks-suspend
     command: make install
     args:
-      chdir: "/home/{{ current_user }}/.riot.sh/debian-luks-suspend"
+      chdir: "/home/{{ current_user }}/.riot-sh/debian-luks-suspend"
 
 
 
