@@ -211,22 +211,22 @@
   - name: Setup arc dark theme for gtk
     become: yes
     become_user: "{{ current_user }}"
-    shell: gsettings set org.gnome.desktop.interface gtk-theme "arc-dark"
+    shell: gsettings set org.gnome.desktop.interface gtk-theme "Arc-Darker"
   
   - name: Setup arc dark theme for windows
     become: yes
     become_user: "{{ current_user }}"
-    shell: gsettings set org.gnome.desktop.wm.preferences theme "arc-dark"
+    shell: gsettings set org.gnome.desktop.wm.preferences theme "Arc-Darker"
     
   - name: Setup arc theme for xfce
     become: yes
     become_user: "{{ current_user }}"
-    shell: xfconf-query -c xsettings -p /Net/ThemeName -s "arc-dark"
+    shell: xfconf-query -c xsettings -p /Net/ThemeName -s "Arc-Darker"
     
   - name: Setup arc theme for xfce step 2
     become: yes
     become_user: "{{ current_user }}"
-    shell: xfconf-query -c xfwm4 -p /general/theme -s "arc-dark"
+    shell: xfconf-query -c xfwm4 -p /general/theme -s "Arc-Darker"
   
   - name: install flat remix icons
     become: yes
@@ -242,12 +242,12 @@
   - name: setup flat remix icons
     become: yes
     become_user: "{{ current_user }}"
-    shell: xfconf-query -c xfwm4 -p /general/theme -s "Flat-Remix"
+    shell: xfconf-query -c xfwm4 -p /general/theme -s "Flat-Remix-Dark"
     
   - name: setup flat remix icons for xfce
     become: yes
     become_user: "{{ current_user }}"
-    shell: gsettings set org.gnome.desktop.interface icon-theme "Flat-Remix"
+    shell: gsettings set org.gnome.desktop.interface icon-theme "Flat-Remix-Dark"
 
   - name: add whisker-menu
     apt: name={{item}} state=installed
