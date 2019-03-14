@@ -167,7 +167,7 @@
     become_user: "{{ current_user }}"
     get_url:
       url: "https://raw.githubusercontent.com/orjail/orjail/master/usr/sbin/orjail"
-      dest: "/home/{{ current_user }}/bin/orjail"
+      dest: "/usr/sbin/orjail"
 
 
   - name: Install restic
