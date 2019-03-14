@@ -12,6 +12,11 @@
     apt:
       name: apt-transport-https
       state: latest
+  
+  - name: Install make
+    apt:
+      name: make
+      state: latest
 
   - name: setup debian sid repository
     apt_repository:
