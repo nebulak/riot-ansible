@@ -34,9 +34,9 @@
     become_user: "{{ current_user }}"
     file: path="/home/{{ current_user }}/.riot-sh/temp" state=directory
 
-  - name: "apt-get update"
-    apt:
-      update_cache: yes
+  #- name: "apt-get update"
+  #  apt:
+  #    update_cache: yes
 
   - name: Install tor
     apt:
