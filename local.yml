@@ -164,7 +164,7 @@
 
   - name: Install Orjail
     become: yes
-    become_user: "{{ current_user }}"
+    #become_user: "{{ current_user }}"
     get_url:
       url: "https://raw.githubusercontent.com/orjail/orjail/master/usr/sbin/orjail"
       dest: "/usr/sbin/orjail"
