@@ -246,7 +246,7 @@
   - name: setup flat remix icons for GTK
     become: yes
     become_user: "{{ current_user }}"
-    shell: xfconf-query -c xsettings -p /Net/IconThemeName -s "Flat-Remix-Dark"
+    shell: xfconf-query -c xsettings -p /Net/IconThemeName -s "Flat-Remix-Blue-Dark"
     #shell: xfconf-query -c xfwm4 -p /general/theme -s "Flat-Remix-Dark"
     
 #  - name: setup flat remix icons for xfce
