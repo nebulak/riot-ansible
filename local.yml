@@ -55,7 +55,7 @@
 
   - name: Install Dino.im
     apt:
-      name: torbrowser-launcher
+      name: dino-im
       state: latest
       default_release: sid
   
