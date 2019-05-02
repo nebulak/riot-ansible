@@ -199,7 +199,22 @@
     args:
       chdir: "/home/{{ current_user }}/.riot-sh/debian-luks-suspend"
 
+# Configure logind handling in xfce
+# source: https://askubuntu.com/questions/460101/xfce4-power-manager-suspend-not-available-for-lid-close
 
+  - name: Let logind handle lidswitch event
+    command: xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/logind-handle-lid-switch -n -t bool -s true
+    
+  - name: Let logind handle power key event
+    command: xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/logind-handle-power-key -n -t bool -s true
+    
+  - name: Let logind handle suspend key event
+    command: xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/logind-handle-suspend-key -n -t bool -s true
+    
+  - name: Let logind handle hibernate key event
+    command: xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/logind-handle-hibernate-key -n -t bool -s true
+  
+  
 
 # STYLE
 
